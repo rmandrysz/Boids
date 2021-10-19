@@ -229,7 +229,7 @@ GameObject:
   m_Layer: 0
   m_Name: PointPlotter
   m_TagString: Untagged
-  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -259,10 +259,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4da6bbd397fef44ba95b487d3268a2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfPoints: 1000
-  turnFraction: 0
+  numberOfPoints: 800
+  turnFraction: 0.3
+  pow: 2
   pointPrefab: {fileID: 7571229040517097457, guid: a51eb6edaa981fc48ac71a5b6e31c528, type: 3}
-  incrementFraction: 0
+  incrementFraction: 1
+  incrementPow: 1
 --- !u!1 &893712218
 GameObject:
   m_ObjectHideFlags: 0
