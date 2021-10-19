@@ -1065,6 +1065,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4169919901898881587, guid: 51ec2b03f2cd3104683b6fe9b4140e40, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 339805493359521292, guid: 51ec2b03f2cd3104683b6fe9b4140e40, type: 3}
       propertyPath: m_Name
       value: Agent
@@ -1117,5 +1121,6 @@ PrefabInstance:
       propertyPath: speed
       value: 15
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4169919901898881587, guid: 51ec2b03f2cd3104683b6fe9b4140e40, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 51ec2b03f2cd3104683b6fe9b4140e40, type: 3}

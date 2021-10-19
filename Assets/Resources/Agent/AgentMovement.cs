@@ -6,6 +6,8 @@ public class AgentMovement : MonoBehaviour
 {
     public float speed = 10.0f;
     [SerializeField] private Rigidbody rb;
+
+    [SerializeField] private float rangeOfSight = 10f;
     private Vector3 movementDirection;
     private Vector3 velocity;
     
@@ -16,8 +18,24 @@ public class AgentMovement : MonoBehaviour
     {
         Move();
         RotateInMoveDirection();
+        avoidCollisions();
     }
 
+    private bool detectCollisions() {
+        if (Physics.Raycast(transform.position, movementDirection, rangeOfSight)) {
+            Debug.DrawRay(transform.position, movementDirection * rangeOfSight, Color.red);
+            Debug.Log("Hit");
+            return false;
+        }
+        Debug.DrawRay(transform.position, movementDirection * rangeOfSight, Color.white);
+        return true;
+    }
+
+    private void avoidCollisions() {
+        if(detectCollisions()) {
+            
+        }
+    }
     private void Move() {
         velocity = movementDirection * speed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position += velocity);
