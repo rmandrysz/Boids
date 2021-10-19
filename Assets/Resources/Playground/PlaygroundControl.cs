@@ -13,7 +13,7 @@ public class PlaygroundControl : MonoBehaviour
         initSize();
     }
     private void OnCollisionEnter(Collision other) {
-        Debug.Log(other.contacts[0].point);
+        // Debug.Log(other.contacts[0].point);
         loopPosition(other);
     }
 
@@ -24,17 +24,24 @@ public class PlaygroundControl : MonoBehaviour
         float yDist = Mathf.Abs(contactPoint.y);
         float zDist = Mathf.Abs(contactPoint.z);
         float playgroundBorder = playgroundSize / 2f;
+        float epsilon = 1f;
         var agentTransform = agent.transform;
         var agentPosition = agentTransform.position;
 
         if (xDist > yDist && xDist > zDist) {
-            agentTransform.position = new Vector3(-agentPosition.x, agentPosition.y, agentPosition.z);
+                float side = contactPoint.x < 0 ? 1 : -1;
+                float newPosition = side * (playgroundSize - epsilon);
+                agentTransform.position = new Vector3(newPosition, agentPosition.y, agentPosition.z);
         }
         else if (yDist > xDist && yDist > zDist) {
-            agentTransform.position = new Vector3(agentPosition.x, -agentPosition.y, agentPosition.z);
+            float side = contactPoint.y < 0 ? 1 : -1;
+            float newPosition = side * (playgroundSize - epsilon);
+            agentTransform.position = new Vector3(agentPosition.x, newPosition, agentPosition.z);
         }
         else if (zDist > xDist && zDist > yDist) {
-            agentTransform.position = new Vector3(agentPosition.x, agentPosition.y, -agentPosition.z);
+            int side = contactPoint.z < 0 ? 1 : -1;
+            float newPosition = side * (playgroundSize - epsilon);
+            agentTransform.position = new Vector3(agentPosition.x, agentPosition.y, newPosition);
         }
     }
 
