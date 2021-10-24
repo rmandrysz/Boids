@@ -259,12 +259,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4da6bbd397fef44ba95b487d3268a2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfPoints: 800
-  turnFraction: 0.3
-  pow: 2
+  numberOfPoints: 10000
+  turnFraction: 1.618033
+  pow: 0.5
+  radius: 5
   pointPrefab: {fileID: 7571229040517097457, guid: a51eb6edaa981fc48ac71a5b6e31c528, type: 3}
-  incrementFraction: 1
-  incrementPow: 1
+  incrementFraction: 0
+  incrementPow: 0
+  plotIn3D: 1
+  incrementNumberOfPoints: 0
 --- !u!1 &893712218
 GameObject:
   m_ObjectHideFlags: 0
