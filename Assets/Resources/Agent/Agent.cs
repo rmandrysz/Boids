@@ -10,6 +10,8 @@ public class Agent : MonoBehaviour
     [SerializeField] private float rangeOfSight = 10f;
     private Vector3 movementDirection;
     private Vector3 velocity;
+
+    [SerializeField] private float sphereCastRadius = 1f;
     
     private void Start() {
         movementDirection = transform.forward;
@@ -17,26 +19,53 @@ public class Agent : MonoBehaviour
 
     private void FixedUpdate()
     {
+        AvoidCollisions();
         Move();
         RotateInMoveDirection();
-        avoidCollisions();
     }
 
-    private bool detectCollisions() {
-        if (Physics.Raycast(transform.position, movementDirection, rangeOfSight)) {
+    private bool IsDetectingCollisions() {
+        RaycastHit hit;
+        if (Physics.SphereCast(transform.position, sphereCastRadius, movementDirection, out hit, rangeOfSight)) {
             Debug.DrawRay(transform.position, movementDirection * rangeOfSight, Color.red);
-            // Debug.Log("Hit");
-            return false;
+            // print("Found an object - distance: " + hit.distance);
+            return true;
         }
         Debug.DrawRay(transform.position, movementDirection * rangeOfSight, Color.white);
-        return true;
+        return false;
     }
 
-    private void avoidCollisions() {
-        if(detectCollisions()) {
-            
+    private void AvoidCollisions() {
+        if (IsDetectingCollisions()) {
+            Vector3 newDirection = FindNewDirection();
+            movementDirection = newDirection;
         }
     }
+
+    private Vector3 FindNewDirection() {
+        Vector3[] directions = PointCalculator.directions;
+        Vector3 bestDirection = transform.forward;
+        float distanceToObstacle = 0f;
+        RaycastHit hit;
+
+        for (int i = 0; i < directions.Length; ++i) {
+            Vector3 dir = transform.TransformDirection(directions[i]);
+            if (Physics.SphereCast (transform.position, sphereCastRadius, dir, out hit, rangeOfSight)) {
+                Debug.DrawRay(transform.position, dir * rangeOfSight, Color.red);
+                if (hit.distance > distanceToObstacle) {
+                    bestDirection = dir;
+                    distanceToObstacle = hit.distance;
+                }
+            }
+            else {
+                Debug.DrawRay(transform.position, dir * rangeOfSight, Color.green);
+                return dir;
+            }
+        }
+
+        return bestDirection;
+    }
+
     private void Move() {
         velocity = movementDirection * speed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position += velocity);

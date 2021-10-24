@@ -4,15 +4,17 @@ using UnityEngine;
 
 public static class PointCalculator
 {
-    public static Vector3[] viewDirections;
-    public static float awareness = 360f;
+    public static Vector3[] directions;
+    public static int numberOfPoints = 1000;
 
     static PointCalculator() {
+        directions = new Vector3[PointCalculator.numberOfPoints];
+
         float goldenRatio = (1 + Mathf.Sqrt(5)) / 2;
         float thetaIncrement = 2 * Mathf.PI * goldenRatio;
 
-        for (int i = 0; i < awareness; ++i) {
-            float t = i / (awareness + 0.5f);
+        for (int i = 0; i < numberOfPoints; ++i) {
+            float t = i / (numberOfPoints + 0.5f);
             float phi = Mathf.Acos(1 - 2 * t);
             float theta = thetaIncrement * i;
 
@@ -22,7 +24,7 @@ public static class PointCalculator
 
             // Debug.Log(string.Format("distance = {0}, angle = {0}, x = {0}, y = {0}", distance, angle, x, y));
 
-            viewDirections[i] = new Vector3(x, y, z);
+            directions[i] = new Vector3(x, y, z);
         }
     }
 }
