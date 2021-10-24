@@ -19,7 +19,6 @@ public class PointPlotter : MonoBehaviour
     public bool incrementFraction = true;
     public bool incrementPow = true;
     public bool plotIn3D = true;
-
     public bool incrementNumberOfPoints = false;
 
 
