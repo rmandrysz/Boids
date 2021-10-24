@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AgentMovement : MonoBehaviour
+public class Agent : MonoBehaviour
 {
     public float speed = 10.0f;
     [SerializeField] private Rigidbody rb;
@@ -12,8 +12,9 @@ public class AgentMovement : MonoBehaviour
     private Vector3 velocity;
     
     private void Start() {
-        RandomizeDirection();
+        movementDirection = transform.forward;
     }
+
     private void FixedUpdate()
     {
         Move();
@@ -24,7 +25,7 @@ public class AgentMovement : MonoBehaviour
     private bool detectCollisions() {
         if (Physics.Raycast(transform.position, movementDirection, rangeOfSight)) {
             Debug.DrawRay(transform.position, movementDirection * rangeOfSight, Color.red);
-            Debug.Log("Hit");
+            // Debug.Log("Hit");
             return false;
         }
         Debug.DrawRay(transform.position, movementDirection * rangeOfSight, Color.white);
