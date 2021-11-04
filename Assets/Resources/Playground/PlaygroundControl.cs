@@ -10,14 +10,14 @@ public class PlaygroundControl : MonoBehaviour
     [SerializeField] private List<Transform> planesValues;
 
     private void Start() {
-        initSize();
+        InitSize();
     }
     private void OnCollisionEnter(Collision other) {
         // Debug.Log(other.contacts[0].point);
-        loopPosition(other);
+        LoopPosition(other);
     }
 
-    private void loopPosition(Collision agent)
+    private void LoopPosition(Collision agent)
     {
         Vector3 contactPoint = agent.contacts[0].point;
         float xDist = Mathf.Abs(contactPoint.x);
@@ -45,7 +45,7 @@ public class PlaygroundControl : MonoBehaviour
         }
     }
 
-    private void initSize() {
+    private void InitSize() {
         Vector3 size = new Vector3(playgroundSize, playgroundSize, playgroundSize);
 
         foreach (var plane in planesValues) {

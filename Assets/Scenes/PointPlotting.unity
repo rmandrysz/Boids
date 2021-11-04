@@ -260,8 +260,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfPoints: 1000
-  turnFraction: 1.618033
-  pow: 0.5
+  turnFraction: 0
+  pow: 1
   radius: 5
   pointPrefab: {fileID: 7571229040517097457, guid: a51eb6edaa981fc48ac71a5b6e31c528, type: 3}
   incrementFraction: 0
