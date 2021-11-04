@@ -44,7 +44,7 @@ public class Agent : MonoBehaviour
         RaycastHit hit;
         float sphereCastRadius = settings.sphereCastRadius;
         float rangeOfSight = settings.rangeOfSight;
-        if (Physics.SphereCast(transform.position, sphereCastRadius, movementDirection, out hit, rangeOfSight)) {
+        if (Physics.SphereCast(transform.position, sphereCastRadius, movementDirection, out hit, rangeOfSight, settings.obstacleLayer)) {
             Debug.DrawRay(transform.position, movementDirection * rangeOfSight, Color.red);
             if (showDebugLogs) {
                 print("Found an object - distance: " + hit.distance);
@@ -78,7 +78,7 @@ public class Agent : MonoBehaviour
 
         for (int i = 0; i < directions.Length; ++i) {
             Vector3 dir = transform.TransformDirection(directions[i]);
-            if (Physics.SphereCast (transform.position, sphereCastRadius, dir, out hit, rangeOfSight)) {
+            if (Physics.SphereCast (transform.position, sphereCastRadius, dir, out hit, rangeOfSight, settings.obstacleLayer)) {
                 Debug.DrawRay(transform.position, dir * rangeOfSight, Color.red);
                 if (hit.distance > distanceToObstacle) {
                     bestDirection = dir;

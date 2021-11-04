@@ -16,4 +16,5 @@ public class AgentParameters : ScriptableObject
     public float collisionAvoidanceWeight = 10f;
     public float rangeOfSight = 20f;
     public float sphereCastRadius = 1f;
+    public LayerMask obstacleLayer;
 }

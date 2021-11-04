@@ -8,9 +8,12 @@ public class PlaygroundControl : MonoBehaviour
 
     [SerializeField] private List<string> planesKeys;
     [SerializeField] private List<Transform> planesValues;
+    [SerializeField] private bool setInitialSize = false;
 
     private void Start() {
-        InitSize();
+        if (setInitialSize) {
+            InitSize();
+        }
     }
     private void OnCollisionEnter(Collision other) {
         // Debug.Log(other.contacts[0].point);
