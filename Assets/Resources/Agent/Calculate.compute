@@ -1,0 +1,38 @@
+#pragma kernel CSMain
+static const int threadGroupSize = 1024;
+
+struct Agent {
+    float3 pos;
+    float3 dir;
+
+    float3 flockmateDirSum;
+    float3 flockmatePosSum;
+    float3 avgAgentAvoidance;
+    int numFlockmates;
+};
+
+RWStructuredBuffer<Agent> agents;
+int numAgents;
+float rangeOfSight;
+
+[numthreads(threadGroupSize,1,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    agents[id.x].numFlockmates = 0;
+    agents[id.x].flockmatePosSum = 0;
+    agents[id.x].flockmateDirSum = 0;
+    
+    for (uint index = 0; index < numAgents; ++index) {
+        if (id.x != index) {
+            Agent agent = agents[index];
+            float3 offset = agent.pos - agents[id.x].pos;
+            float sqrDst = offset.x * offset.x + offset.y * offset.y + offset.z * offset.z;
+
+            if (sqrDst < rangeOfSight * rangeOfSight) {
+                agents[id.x].numFlockmates += 1;
+                agents[id.x].flockmatePosSum += agent.pos;
+                agents[id.x].flockmateDirSum += agent.dir;
+            }
+        }
+    }
+}

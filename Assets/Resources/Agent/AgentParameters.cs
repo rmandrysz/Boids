@@ -17,4 +17,14 @@ public class AgentParameters : ScriptableObject
     public float rangeOfSight = 20f;
     public float sphereCastRadius = 1f;
     public LayerMask obstacleLayer;
+
+    [Header("Rules")]
+    public bool enableFlockmateAvoidance = false;
+    public float flockmateAvoidanceWeight = 5f;
+
+    public bool enableVelocityMatching = true;
+    public float velocityMatchingWeight = 3f;
+    
+    public bool enableFlockCentering = true;
+    public float flockCenteringWeight = 5f;
 }
